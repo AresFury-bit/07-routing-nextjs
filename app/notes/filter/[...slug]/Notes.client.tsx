@@ -14,19 +14,25 @@ import Pagination from "@/components/Pagination/Pagination";
 interface NotesClientesProps {
   initialPage: number;
   initialSearch: string;
+  initialTag: string | undefined;
 }
 
-const NotesClient = ({ initialPage, initialSearch }: NotesClientesProps) => {
+const NotesClient = ({
+  initialPage,
+  initialSearch,
+  initialTag,
+}: NotesClientesProps) => {
   const [page, setPage] = useState(initialPage);
   const [search, setSearch] = useState(initialSearch);
   const [isModal, setIsModal] = useState(false);
-
+  // console.log(initialTag);
   const { data: note } = useQuery({
-    queryKey: ["notes", page, search],
-    queryFn: () => fetchNotes(page, search),
+    queryKey: ["notes", page, search, initialTag],
+    queryFn: () => fetchNotes(page, search, initialTag),
     placeholderData: keepPreviousData,
     refetchOnMount: false,
   });
+  console.log(note);
 
   const handleButtonClick = () => {
     setIsModal(true);
