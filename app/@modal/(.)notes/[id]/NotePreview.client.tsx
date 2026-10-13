@@ -34,7 +34,7 @@ export default function NotePreview() {
   };
 
   return (
-    <Modal onClose={() => {}}>
+    <Modal onClose={handleBack}>
       <main className={css.main}>
         <div className={css.container}>
           <div className={css.item}>

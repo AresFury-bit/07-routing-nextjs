@@ -7,11 +7,10 @@ import { fetchNotes } from "../../../../lib/api";
 import NotesClient from "../[...slug]/Notes.client";
 
 interface Props {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string[] }>;
   searchParams: Promise<{
-    page: string;
-    search: string;
-    slug: string[];
+    page?: string;
+    search?: string;
   }>;
 }
 
@@ -31,11 +30,7 @@ const Notes = async ({ searchParams, params }: Props) => {
   return (
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <NotesClient
-          initialPage={page}
-          initialSearch={search}
-          initialTag={tag}
-        />
+        <NotesClient initialPage={page} initialSearch={search} tag={tag} />
       </HydrationBoundary>
     </>
   );
